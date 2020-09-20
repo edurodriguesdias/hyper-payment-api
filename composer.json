@@ -6,8 +6,10 @@
     "type": "project",
     "require": {
         "php": "^7.3",
+        "anik/form-request": "^3.1",
         "doctrine/inflector": "1.4.0",
-        "laravel/lumen-framework": "^8.0"
+        "laravel/lumen-framework": "^7.0",
+        "pearl/lumen-request-validate": "^1.4"
     },
     "require-dev": {
         "flipbox/lumen-generator": "^8.0",

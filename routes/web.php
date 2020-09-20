@@ -1,5 +1,7 @@
 <?php
 
-$router->get('/', function () use ($router) {
-    return $router->app->version();
+$router->group(['prefix' => 'v1'], function($router) {
+    $router->group(['prefix' => 'transaction'], function($router) {
+        $router->post('/', 'TransactionController@peerToPeer');
+    });
 });

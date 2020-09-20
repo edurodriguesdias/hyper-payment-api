@@ -14,7 +14,7 @@ use Illuminate\Support\Str;
 
 class User extends Model implements AuthenticatableContract, AuthorizableContract
 {
-    use Authenticatable, Authorizable, HasFactory;
+    use Authenticatable, Authorizable;
 
     protected $fillable = [
         'uuid',

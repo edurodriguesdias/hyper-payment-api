@@ -8,7 +8,7 @@ class TransactionController extends Controller
 {
     public function peerToPeer(TransactionRequest $request)
     {
-        $this->transaction->processTransfer($request->payer, $request->payee, $request->value);
+        // $this->transaction->processTransfer($request->payer, $request->payee, $request->value);
 
         return response()->json([
             'message' => 'we are processing the transaction'

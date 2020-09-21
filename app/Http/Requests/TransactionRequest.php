@@ -21,8 +21,8 @@ class TransactionRequest extends RequestAbstract
             'payer' => [
                 'required', 
                 'integer', 
-                'exists:users,id', 
-                new IsCustomerRule(), 
+                'exists:users,id',
+                new IsCustomerRule(),
                 new CheckUserHasBalanceRule()
             ],
             'payee' => 'required|integer|exists:users,id|different:payer'

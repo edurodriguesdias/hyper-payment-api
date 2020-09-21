@@ -2,6 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\IsCustomerRule;
+use App\Rules\CheckUserHasBalanceRule;
+
 use Pearl\RequestValidate\RequestAbstract;
 
 class TransactionRequest extends RequestAbstract
@@ -15,8 +18,14 @@ class TransactionRequest extends RequestAbstract
     {
         return [
             'value' => 'required|numeric',
-            'payer' => 'required|integer|exists:users,uuid|is_customer',
-            'payee' => 'required|integer|exists:users,uuid|different:payer'
+            'payer' => [
+                'required', 
+                'integer', 
+                'exists:users,id', 
+                new IsCustomerRule(), 
+                new CheckUserHasBalanceRule()
+            ],
+            'payee' => 'required|integer|exists:users,id|different:payer'
         ];
     }
 

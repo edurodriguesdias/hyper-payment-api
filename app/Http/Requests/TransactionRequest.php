@@ -2,6 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\IsCustomerRule;
+use App\Rules\CheckUserHasBalanceRule;
+
 use Pearl\RequestValidate\RequestAbstract;
 
 class TransactionRequest extends RequestAbstract
@@ -11,12 +14,18 @@ class TransactionRequest extends RequestAbstract
         return true;
     }
 
-    public function rules()
+    public function rules(IsCustomerRule $is_customer, CheckUserHasBalanceRule $user_has_balance)
     {
         return [
             'value' => 'required|numeric',
-            'payer' => 'required|integer|exists:users,uuid|is_customer',
-            'payee' => 'required|integer|exists:users,uuid|different:payer'
+            'payer' => [
+                'required', 
+                'integer', 
+                'exists:users,id',
+                $user_has_balance,
+                
+            ],
+            'payee' => 'required|integer|exists:users,id|different:payer'
         ];
     }
 

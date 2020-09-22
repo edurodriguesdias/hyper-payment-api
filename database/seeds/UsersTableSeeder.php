@@ -1,11 +1,6 @@
 <?php
 
-namespace Database\Seeders;
-
 use Illuminate\Database\Seeder;
-
-use App\Models\User;
-use App\Models\UserAccount;
 
 class UsersTableSeeder extends Seeder
 {
@@ -16,7 +11,7 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        User::factory()->count(30)->create()->each(function ($user) {
+        factory(App\Models\User::class, 2)->create()->each(function ($user) {
             $user->account()->create([
                 'balance' => 20
             ]);

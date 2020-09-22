@@ -14,7 +14,7 @@ class TransactionRequest extends RequestAbstract
         return true;
     }
 
-    public function rules()
+    public function rules(IsCustomerRule $is_customer, CheckUserHasBalanceRule $user_has_balance)
     {
         return [
             'value' => 'required|numeric',
@@ -22,8 +22,8 @@ class TransactionRequest extends RequestAbstract
                 'required', 
                 'integer', 
                 'exists:users,id',
-                new IsCustomerRule(),
-                new CheckUserHasBalanceRule()
+                $is_customer,
+                $user_has_balance
             ],
             'payee' => 'required|integer|exists:users,id|different:payer'
         ];

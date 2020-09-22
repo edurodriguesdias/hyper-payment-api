@@ -19,6 +19,10 @@ class CreateUserAccountsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->decimal('balance', 10, 2);
             $table->timestamps();
+
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users');
         });
     }
 

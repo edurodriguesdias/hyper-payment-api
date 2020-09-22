@@ -1,14 +1,13 @@
 <?php
 
 namespace App\Services\Transaction;
-
+use GuzzleHttp\Client;
 abstract class AbstractTransaction
 {
     protected function initClient()
     {
         return new Client([
             'base_uri' => env('HYPER_AUTORIZER_TRANSACTION_URL'),
-            'headers' => [],
             'timeout' => 90
         ]);
     }
@@ -16,7 +15,9 @@ abstract class AbstractTransaction
     protected function badResponse($exception)
     {
         return [
-            'message' => $exception->getMessage()
+            'message' => $exception->getMessage(),
+            'code' => $exception->getStatusCode(),
+            'status' => 'error'
         ];
     }
 }

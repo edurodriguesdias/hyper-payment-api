@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\User;
+use Exception;
 
 class UserRepository implements UserRepositoryInterface 
 {
@@ -16,5 +17,16 @@ class UserRepository implements UserRepositoryInterface
     public function get(int $user_id) : User
     {
         return $this->user->find($user_id);
+    }
+
+    public function createTransaction(int $payer_id, int $payee, float $amount)
+    {
+        $user = $this->get($payer_id);
+
+        return $user->transactions()->create([
+            'payee' => $payee,
+            'status' => 'processing',
+            'amount' => $amount
+        ]);
     }
 }

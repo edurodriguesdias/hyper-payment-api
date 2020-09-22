@@ -19,9 +19,9 @@ class UserAccountRepository implements UserAccountRepositoryInterface
         return UserAccount::where('user_id', $user_id)->first();
     }
 
-    public function addBalance($payee, $amount)
+    public function addBalance($user_id, $amount)
     {
-        $account = UserAccount::where('user_id', $payee)->first();
+        $account = UserAccount::where('user_id', $user_id)->first();
 
         $account->balance += $amount;
 

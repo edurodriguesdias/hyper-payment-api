@@ -45,7 +45,12 @@ class TransferService extends AbstractService
     {
         $transaction = $this->transactionRepository->get($transaction_id);
 
-        $this->userAccountModel->addBalance($transaction->payee, $transaction->amount);
+        $this->addBalance($transaction->payee, $transaction->amount);
+    }
+
+    public function addBalance($user_id, $amount)
+    {
+        $this->userAccountModel->addBalance($user_id, $amount);
     }
 
     public function setAsProcessed($transaction_id)

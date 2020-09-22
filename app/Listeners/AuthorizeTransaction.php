@@ -28,6 +28,8 @@ class AuthorizeTransaction
 
             Queue::pushOn('high', new AddBalanceToPayeeJob($transaction->id));
         } else {
+            $this->transferService->addBalance($transaction->payer, $transaction->amount);
+            
             Queue::pushOn('medium', new SendNotificationMessage($transaction->payer, 'Sua transferência não foi efetuada. Tente novamente mais tarde!'));
         }
     }

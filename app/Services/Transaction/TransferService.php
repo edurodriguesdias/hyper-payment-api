@@ -2,9 +2,12 @@
 
 namespace App\Services\Transaction;
 
+use App\Events\TransactionCreatedEvent;
+use App\Repositories\TransactionRepositoryInterface;
 use App\Repositories\UserAccountRepositoryInterface;
-use Illuminate\Support\Facades\DB;
 use App\Repositories\UserRepositoryInterface;
+
+use Illuminate\Support\Facades\Log;
 
 use Exception;
 
@@ -14,11 +17,12 @@ class TransferService extends AbstractTransaction
     private $userModel;
     private $userAccountModel;
 
-    public function __construct(UserRepositoryInterface $userRepository, UserAccountRepositoryInterface $userAccountModel)
+    public function __construct(UserRepositoryInterface $userRepository, UserAccountRepositoryInterface $userAccountModel, TransactionRepositoryInterface $transactionRepository)
     {
         $this->client = $this->initClient();
         $this->userModel = $userRepository;
         $this->userAccountModel = $userAccountModel;
+        $this->transactionRepository = $transactionRepository;
     }
 
     public function process(int $payer, int $payee, float $amount)
@@ -27,11 +31,20 @@ class TransferService extends AbstractTransaction
 
         $this->userAccountModel->withdrawBalance($payer, $amount);
 
+        event(new TransactionCreatedEvent($transaction));
+        
         return [
             'status' => 'success',
             'data' => $transaction->toArray(),
             'message' => 'transaction is processing'
         ];
+    }
+
+    public function addPayeeBalance($transaction_id)
+    {
+        $transaction = $this->transactionRepository->get($transaction_id);
+
+        $this->userAccountModel->addBalance($transaction->payee, $transaction->amount);
     }
 
     public function authorizer()

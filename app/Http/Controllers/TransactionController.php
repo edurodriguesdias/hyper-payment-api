@@ -16,7 +16,7 @@ class TransactionController extends Controller
 
     public function peerToPeer(TransactionRequest $request)
     {
-        dd($this->transaction->process(5, 1, 10));
+        $this->transaction->process($request->payer, $request->payee, $request->value);
 
         return response()->json([
             'message' => 'we are processing the transaction'

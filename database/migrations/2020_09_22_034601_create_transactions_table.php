@@ -23,7 +23,8 @@ class CreateTransactionsTable extends Migration
                 'processing',
                 'canceled',
                 'processed',
-                'not_authorized'
+                'not_authorized',
+                'authorized'
             ])->default('processing');
 
             $table->foreign('payer')

@@ -11,7 +11,7 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Models\User::class, 50)->create()->each(function ($user) {
+        factory(App\Models\User::class, 2)->create()->each(function ($user) {
             $user->account()->create([
                 'balance' => 20
             ]);

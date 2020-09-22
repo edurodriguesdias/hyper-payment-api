@@ -24,7 +24,7 @@ class AddBalanceToPayeeJob extends Job
 
         $transfer = $model->get($this->transaction_id);
 
-        $amount = number_format($transfer->balance, 2, ',', '.');
+        $amount = number_format($transfer->amount, 2, ',', '.');
 
         Queue::pushOn('medium', new SendNotificationMessage($transfer->payee, "Você recebeu uma nova transferência no valor de R$ ${amount}"));
     }

@@ -68,7 +68,7 @@ class TransferService extends AbstractService
             return [
                 'message' => $authorizer['message'],
                 'code' => $req->getStatusCode(),
-                'status' => 'error'    
+                'status' => 'success'
             ];
         } catch (Exception $e) {
             return $this->badResponse($e);

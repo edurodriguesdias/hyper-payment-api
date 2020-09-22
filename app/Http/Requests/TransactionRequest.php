@@ -22,8 +22,8 @@ class TransactionRequest extends RequestAbstract
                 'required', 
                 'integer', 
                 'exists:users,id',
-                $is_customer,
-                $user_has_balance
+                $user_has_balance,
+                
             ],
             'payee' => 'required|integer|exists:users,id|different:payer'
         ];

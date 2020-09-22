@@ -32,4 +32,14 @@ class Transaction extends Model
             }
         });
     }
+
+    public function payer()
+    {
+        return $this->belongsTo(User::class, 'payer', 'id');
+    }
+
+    public function payee()
+    {
+        return $this->belongsTo(User::class, 'payee', 'id');
+    }
 }

@@ -3,15 +3,16 @@
 namespace App\Services\Transaction;
 
 use App\Events\TransactionCreatedEvent;
+
 use App\Repositories\TransactionRepositoryInterface;
 use App\Repositories\UserAccountRepositoryInterface;
 use App\Repositories\UserRepositoryInterface;
 
-use Illuminate\Support\Facades\Log;
+use App\Services\AbstractService;
 
 use Exception;
 
-class TransferService extends AbstractTransaction
+class TransferService extends AbstractService
 {
     private $client;
     private $userModel;
@@ -19,7 +20,7 @@ class TransferService extends AbstractTransaction
 
     public function __construct(UserRepositoryInterface $userRepository, UserAccountRepositoryInterface $userAccountModel, TransactionRepositoryInterface $transactionRepository)
     {
-        $this->client = $this->initClient();
+        $this->client = $this->initClient(env('HYPER_AUTORIZER_TRANSACTION_URL'));
         $this->userModel = $userRepository;
         $this->userAccountModel = $userAccountModel;
         $this->transactionRepository = $transactionRepository;
@@ -45,6 +46,11 @@ class TransferService extends AbstractTransaction
         $transaction = $this->transactionRepository->get($transaction_id);
 
         $this->userAccountModel->addBalance($transaction->payee, $transaction->amount);
+    }
+
+    public function setAsProcessed($transaction_id)
+    {
+        $this->transactionRepository->changeStatus($transaction_id, 'processed');   
     }
 
     public function authorizer()

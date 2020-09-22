@@ -17,4 +17,11 @@ class TransactionRepository implements TransactionRepositoryInterface {
     {
         return $this->transaction->find($transaction_id);
     }
+
+    public function changeStatus($transaction_id, $status)
+    {
+        return $this->transaction->find($transaction_id)->update([
+            'status' => $status
+        ]);
+    }
 }

@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Services\Transaction;
+namespace App\Services;
 use GuzzleHttp\Client;
-abstract class AbstractTransaction
+
+abstract class AbstractService
 {
-    protected function initClient()
+    protected function initClient($base_url)
     {
         return new Client([
-            'base_uri' => env('HYPER_AUTORIZER_TRANSACTION_URL'),
+            'base_uri' => $base_url,
             'timeout' => 90
         ]);
     }

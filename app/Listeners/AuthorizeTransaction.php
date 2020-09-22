@@ -5,7 +5,7 @@ namespace App\Listeners;
 use App\Events\TransactionCreatedEvent;
 use App\Services\Transaction\TransferService;
 use App\Jobs\AddBalanceToPayeeJob;
-
+use App\Jobs\SendNotificationMessage;
 use Illuminate\Support\Facades\Queue;
 
 class AuthorizeTransaction
@@ -28,7 +28,7 @@ class AuthorizeTransaction
 
             Queue::pushOn('high', new AddBalanceToPayeeJob($transaction->id));
         } else {
-            //Queue::pushOn('high', TransactionNotAuthorizedMessage($transaction->id));
+            Queue::pushOn('medium', new SendNotificationMessage($transaction->payer, 'Sua transferência não foi efetuada. Tente novamente mais tarde!'));
         }
     }
 }

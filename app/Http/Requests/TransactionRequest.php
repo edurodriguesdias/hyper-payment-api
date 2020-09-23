@@ -19,10 +19,11 @@ class TransactionRequest extends RequestAbstract
         return [
             'value' => 'required|numeric',
             'payer' => [
-                'required', 
-                'integer', 
+                'required',
+                'integer',
                 'exists:users,id',
                 $user_has_balance,
+                $is_customer
                 
             ],
             'payee' => 'required|integer|exists:users,id|different:payer'

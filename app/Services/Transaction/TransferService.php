@@ -33,7 +33,7 @@ class TransferService extends AbstractService
         $this->userAccountModel->withdrawBalance($payer, $amount);
 
         event(new TransactionCreatedEvent($transaction));
-        
+
         return [
             'status' => 'success',
             'data' => $transaction->toArray(),

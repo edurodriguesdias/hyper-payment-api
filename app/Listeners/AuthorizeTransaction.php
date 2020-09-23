@@ -28,7 +28,7 @@ class AuthorizeTransaction implements ShouldQueue
     {
         $transaction = $event->transaction;
 
-        if($this->transferService->authorizer()['code'] === 200) {
+        if($this->transferService->authorizer()['code'] == 200) {
             $transaction->update([
                 'status' => 'authorized'
             ]);
@@ -37,7 +37,7 @@ class AuthorizeTransaction implements ShouldQueue
         } else {
             $this->transferService->addBalance($transaction->payer, $transaction->amount);
 
-            $transaction->update([
+            $transaction->update([  
                 'status' => 'not_authorized'
             ]);
 

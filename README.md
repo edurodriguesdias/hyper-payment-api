@@ -20,6 +20,30 @@ Temos 2 tipos de usuários, os comuns e lojistas, ambos têm carteira com dinhei
 
 - No recebimento de pagamento, o usuário ou lojista precisa receber notificação enviada por um serviço de terceiro e eventualmente este serviço pode estar indisponível/instável.
 
+## Setup do projeto
+- Linguagem: PHP 7.2
+- Framework: Lumen versão 7.2.2 / Laravel Components ^7.0
+- Banco de dados: Mysql 5.6
+
+## Dependências
+- Docker
+- Docker compose
+
+## Instruções para rodar
+
+Antes de tudo, entre na pasta lumen e renomeie o arquivo `.env.example` para `.env` afim de garantir que as variaveis de ambiente fiquem certas assim como para com os testes.
+
+### Execute o arquivo `run.sh` da pasta raiz via terminal:
+
+`sh ./run.sh`
+
+Este comando irá executar alguns passos e você pode acompanhar via terminal:
+1) Build
+2) Instalação das dependências
+3) Execução das migrations e seeds
+
+Após esses passos o ambiente poderá ser acessado através do **http://localhost**
+
 ## Estrutura do banco de dados
 ![database structure](/images/db-structure.png)
 
@@ -38,11 +62,6 @@ Proposta de melhoria (ROADMAP)  :black_square_button:
 - Validar se o pagador e o recebedor não são a mesma pessoa :white_check_mark:
 - Não permitir transações idênticas num curto período de tempo :black_square_button:
 - Utilizar UUID como o identificador do pagador e do recebedor ao invés do ID incremental (sigilo comercial) :black_square_button: 
-
-## Setup do projeto
-- Linguagem: PHP 7.2
-- Framework: Lumen versão 7.0
-- Banco de dados: Mysql 5.6
 
 ## Testes unitários e integração
 Para executar os testes unitários e de integração, basta executar o seguinte comando na raiz do projeto

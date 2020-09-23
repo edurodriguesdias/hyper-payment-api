@@ -17,7 +17,7 @@ class TransactionRequest extends RequestAbstract
     public function rules(IsCustomerRule $is_customer, CheckUserHasBalanceRule $user_has_balance)
     {
         return [
-            'value' => 'required|numeric',
+            'value' => 'required|numeric|min:0.1',
             'payer' => [
                 'required',
                 'integer',

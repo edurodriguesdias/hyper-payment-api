@@ -32,13 +32,13 @@ Temos 2 tipos de usuários, os comuns e lojistas, ambos têm carteira com dinhei
 
 ## Instruções para rodar
 
-Antes de tudo, entre na pasta lumen e renomeie o arquivo `.env.example` para `.env` afim de garantir que as variaveis de ambiente fiquem certas assim como para com os testes.
+Antes de tudo, entre na pasta hyper-payment-api e renomeie o arquivo `.env.example` para `.env` afim de garantir que as variáveis de ambiente estejam pré configuradas.
 
-### Execute o arquivo `run.sh` na raiz do projeto:
+#### Execute o arquivo `run.sh` na raiz do projeto:
 
 `sh ./run.sh`
 
-Este comando irá executar os seguintes passos em ordem:
+Este comando irá executar os seguintes passos em ordem exata:
 
 1) Abrir diretório docker na raiz
 2) Subir os containers Docker em sua máquina local
@@ -47,22 +47,23 @@ Este comando irá executar os seguintes passos em ordem:
 4) Execução das Seeds
 5) Iniciar o processamento de filas localmente
 
-Você poderá acompanhar o progresso no terminal.
+Você poderá acompanhar o progresso no terminal :wink:
 
-Após esses passos o ambiente poderá ser acessado através do **http://localhost**
+Após esses passos o ambiente poderá ser acessado através da url: **http://localhost**
 
 ## Estrutura do banco de dados
-![database structure](/images/db-structure.png)
+![database structure](/readme/db-structure.png)
 
 ## Estrutura processamento das transações
-![transaction flow](/images/transaction-flow.png)
+![transaction flow](/readme/transaction-flow.png)
 
-## Agenda evolutiva de melhorias
+## Agenda evolutiva de melhorias (sugestões)
 
-### Legenda
-Já implementado    :white_check_mark: 
+#### Legenda
 
-Proposta de melhoria (ROADMAP)  :black_square_button: 
+- Já implementado    :white_check_mark: 
+
+- Proposta de melhoria (ROADMAP)  :black_square_button: 
 
 ### Melhorias
 - Notificar o pagador caso a transferência não tenha sido autorizada :white_check_mark:
@@ -106,3 +107,6 @@ POST /transaction
     "payee" : 15
 }
 ```
+
+## Dúvidas, sugestões e críticas
+Caso tenha alguma dúvida, sugestões de melhoria ou crítica, fique à vontade para fazer uma PR ou me contatar no email: eduardodias.dev@gmail.com :email:

@@ -33,14 +33,17 @@ Temos 2 tipos de usuários, os comuns e lojistas, ambos têm carteira com dinhei
 
 Antes de tudo, entre na pasta lumen e renomeie o arquivo `.env.example` para `.env` afim de garantir que as variaveis de ambiente fiquem certas assim como para com os testes.
 
-### Execute o arquivo `run.sh` da pasta raiz via terminal:
+### Execute o arquivo `run.sh` na raiz do projeto:
 
 `sh ./run.sh`
 
 Este comando irá executar alguns passos e você pode acompanhar via terminal:
-1) Build
-2) Instalação das dependências
-3) Execução das migrations e seeds
+1) Abrir diretório docker na raiz
+2) Subir os containers Docker em sua máquina local
+3) Instalação das dependências
+3) Execução das Migrations
+4) Execução das Seeds
+5) Iniciar o processamento de filas localmente
 
 Após esses passos o ambiente poderá ser acessado através do **http://localhost**
 

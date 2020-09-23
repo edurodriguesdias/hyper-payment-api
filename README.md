@@ -37,13 +37,16 @@ Antes de tudo, entre na pasta lumen e renomeie o arquivo `.env.example` para `.e
 
 `sh ./run.sh`
 
-Este comando irá executar alguns passos e você pode acompanhar via terminal:
+Este comando irá executar os seguintes passos em ordem:
+
 1) Abrir diretório docker na raiz
 2) Subir os containers Docker em sua máquina local
 3) Instalação das dependências
 3) Execução das Migrations
 4) Execução das Seeds
 5) Iniciar o processamento de filas localmente
+
+Você poderá acompanhar o progresso no terminal.
 
 Após esses passos o ambiente poderá ser acessado através do **http://localhost**
 

@@ -10,10 +10,10 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: hyper_payment_com_br
-      
+
   nginx:
     container_name: nginx
-    build: images/nginx
+    build: docker/images/nginx
     command: nginx -g "daemon off;"
     links:
       - php
@@ -24,9 +24,9 @@ services:
 
   php:
     container_name: php
-    build: images/php
+    build: docker/images/php
     volumes:
-      - ../:/var/www/html
+      - ./:/var/www/html
     working_dir: /var/www/html/public
     command: php-fpm
     links:

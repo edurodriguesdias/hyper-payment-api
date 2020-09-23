@@ -1,12 +1,15 @@
 #!/bin/bash
-echo Go to docker dir
-cd docker
+echo Create copy .env-example to .env
+cp ./.env-example ./.env
 
-echo Uploading Application container
+echo Uploading Application containers
 docker-compose up --build -d
 
 echo Install dependencies
-docker run --rm --interactive --tty -v $PWD/hyper-payment-api:/app composer install
+docker run --rm --interactive --tty -v $PWD:/app composer install
+
+echo Refresh migrations
+docker exec -it php php /var/www/html/artisan migrate:refresh
 
 echo Running migrations
 docker exec -it php php /var/www/html/artisan migrate

@@ -20,9 +20,10 @@ Temos 2 tipos de usuários, os comuns e lojistas, ambos têm carteira com dinhei
 
 - No recebimento de pagamento, o usuário ou lojista precisa receber notificação enviada por um serviço de terceiro e eventualmente este serviço pode estar indisponível/instável.
 
-## Estrutura processamento das transações
-
 ## Estrutura do banco de dados
+![database structure](/images/db-structure.png)
+
+## Estrutura processamento das transações
 
 ## Agenda evolutiva de melhorias
 

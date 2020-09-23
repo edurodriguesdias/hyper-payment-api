@@ -24,6 +24,7 @@ Temos 2 tipos de usuários, os comuns e lojistas, ambos têm carteira com dinhei
 ![database structure](/images/db-structure.png)
 
 ## Estrutura processamento das transações
+![transaction flow](/images/transaction-flow.png)
 
 ## Agenda evolutiva de melhorias
 

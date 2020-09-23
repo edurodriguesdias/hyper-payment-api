@@ -24,6 +24,7 @@ Temos 2 tipos de usuários, os comuns e lojistas, ambos têm carteira com dinhei
 - Linguagem: PHP 7.2
 - Framework: Lumen versão 7.2.2 / Laravel Components ^7.0
 - Banco de dados: Mysql 5.6
+- Nginx
 
 ## Dependências
 - Docker

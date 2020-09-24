@@ -30,17 +30,15 @@ Temos 2 tipos de usuários, os comuns e lojistas, ambos têm carteira com dinhei
 - Docker
 - Docker compose
 
-## Instruções para rodar
+## Instruções para executar
 
-Antes de tudo, entre na pasta hyper-payment-api e renomeie o arquivo `.env.example` para `.env` afim de garantir que as variáveis de ambiente estejam pré configuradas.
-
-#### Execute o arquivo `run.sh` na raiz do projeto:
+### Execute o arquivo `run.sh` na raiz do projeto:
 
 `sh ./run.sh`
 
 Este comando irá executar os seguintes passos em ordem exata:
 
-1) Abrir diretório docker na raiz
+1) Criar o arquivo .env com base no .env-example
 2) Subir os containers Docker em sua máquina local
 3) Instalação das dependências
 3) Execução das Migrations

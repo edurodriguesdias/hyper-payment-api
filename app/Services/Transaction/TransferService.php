@@ -18,7 +18,11 @@ class TransferService extends AbstractService
     private $userModel;
     private $userAccountModel;
 
-    public function __construct(UserRepositoryInterface $userRepository, UserAccountRepositoryInterface $userAccountModel, TransactionRepositoryInterface $transactionRepository)
+    public function __construct(
+        UserRepositoryInterface $userRepository,
+        UserAccountRepositoryInterface $userAccountModel,
+        TransactionRepositoryInterface $transactionRepository
+    )
     {
         $this->client = $this->initClient(env('HYPER_AUTORIZER_TRANSACTION_URL'));
         $this->userModel = $userRepository;
@@ -33,7 +37,7 @@ class TransferService extends AbstractService
         $this->userAccountModel->withdrawBalance($payer, $amount);
 
         event(new TransactionCreatedEvent($transaction));
-        
+
         return [
             'status' => 'success',
             'data' => $transaction->toArray(),
@@ -55,7 +59,7 @@ class TransferService extends AbstractService
 
     public function setAsProcessed($transaction_id)
     {
-        $this->transactionRepository->changeStatus($transaction_id, 'processed');   
+        $this->transactionRepository->changeStatus($transaction_id, 'processed');
     }
 
     public function authorizer()

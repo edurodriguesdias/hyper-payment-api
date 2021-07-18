@@ -5,7 +5,7 @@ use Laravel\Lumen\Testing\DatabaseTransactions;
 
 use App\Models\User;
 
-class TransactionUnitTest extends TestCase
+class TransactionTest extends TestCase
 {
     private $payer;
     private $payee;
@@ -71,7 +71,7 @@ class TransactionUnitTest extends TestCase
             "value" => [
                 "The value must be at least 0.1."
             ]
-        ]);        
+        ]);
     }
 
     public function testTransactionBetweenSameUsers()

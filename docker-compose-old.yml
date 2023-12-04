@@ -1,0 +1,37 @@
+version: "3.3"
+
+services:
+  db:
+    container_name: mysql
+    image: mysql:5.6
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: hyper_payment_com_br
+
+  nginx:
+    container_name: nginx
+    build: docker/images/nginx
+    command: nginx -g "daemon off;"
+    links:
+      - php
+    ports:
+      - "80:80"
+    depends_on:
+      - db
+
+  php:
+    container_name: php
+    build: docker/images/php
+    volumes:
+      - ./:/var/www/html
+    working_dir: /var/www/html/public
+    command: php-fpm
+    links:
+      - db:db
+    ports:
+      - "9000:9000"
+    depends_on:
+      - db

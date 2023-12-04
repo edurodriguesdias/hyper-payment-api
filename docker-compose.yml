@@ -1,37 +1,78 @@
 version: "3.3"
-
 services:
-  db:
-    container_name: mysql
-    image: mysql:5.6
-    restart: always
+  hyper_db:
+    platform: linux/amd64
+    image: mysql:5.7
     ports:
       - "3306:3306"
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: hyper_payment_com_br
+    volumes:
+      - hyper_volume:/var/lib/mysql
 
-  nginx:
-    container_name: nginx
+  hyper_nginx:
     build: docker/images/nginx
     command: nginx -g "daemon off;"
     links:
-      - php
+      - hyper_php
     ports:
-      - "80:80"
+      - "6549:80"
     depends_on:
-      - db
+      - hyper_db
+      - hyper_php
 
-  php:
-    container_name: php
+  redis:
+    image: redis
+    ports:
+      - 6379:6379
+    volumes:
+      - hyper_volume:/data
+
+  hyper_php:
     build: docker/images/php
     volumes:
       - ./:/var/www/html
     working_dir: /var/www/html/public
     command: php-fpm
     links:
-      - db:db
+      - hyper_db:hyper_db
     ports:
       - "9000:9000"
     depends_on:
-      - db
+      - hyper_db
+      - redis
+
+  hyper_prometheus:
+    image: prom/prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    networks:
+      - metrics
+    depends_on:
+      - hyper_php
+      - hyper_db
+      - redis
+
+  grafana:
+    build:
+      context: ./grafana
+    container_name: grafana
+    ports: 
+      - 3000:3000
+    volumes:
+      - hyper_volume:/var/lib/grafana
+    networks:
+      - metrics
+    depends_on:
+      - hyper_prometheus
+      - hyper_db
+      - redis
+volumes:
+  hyper_volume:
+    external: true
+networks:
+  metrics:
+    driver: bridge
